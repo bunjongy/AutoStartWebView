@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Auto Start WebView</string>
+    <string name="home">Home</string>
+    <string name="url">Url</string>
+    <string name="exit">Exit</string>
+    <string name="string_cancel">Cancel</string>
+    <string name="string_ok">Ok</string>
+    <string name="string_new_url_title">URL Default</string>
+</resources>
