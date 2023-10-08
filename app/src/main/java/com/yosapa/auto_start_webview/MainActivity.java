@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler(this));
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -131,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
             showNavigationBar();
             exitKios();
             finishAffinity();
-            System.exit(0);
+            throw new RuntimeException("EXIT_CLICKED");
+            //System.exit(0);
         }
         return true;
     }
@@ -141,12 +145,15 @@ public class MainActivity extends AppCompatActivity {
         hideSystemUI();
         Log.i(TAG,"onWindowFocusChanged="+hasFocus);
     }
-    @Override
+
+/*    @Override
     public void onBackPressed() {
+        super.onBackPressed();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String load_url = pref.getString(URL_KEY,"https://www.google.com/");
+        String load_url = pref.getString(URL_KEY, "https://www.google.com/");
         myWebView.loadUrl(load_url);
-    }
+    }*/
+
     @Override
     protected void onStart() {
         super.onStart();
