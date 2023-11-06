@@ -1,5 +1,9 @@
 package com.yosapa.auto_start_webview;
 
+import static android.app.PendingIntent.getActivity;
+import static android.content.Intent.CATEGORY_LAUNCHER;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,6 +40,14 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -90,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
         myWebView.setWebViewClient(new MyWebViewClient());
-        myWebView.setWebChromeClient(new WebChromeClient());
+        //myWebView.setWebChromeClient(new WebChromeClient());
         String load_url = pref.getString(URL_KEY,"https://www.google.com/");
         myWebView.loadUrl(load_url);
     }
@@ -157,6 +169,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+/*        List<String> res = new ArrayList<String>();
+        try {
+            String[] cmd = new String[]{"shell", "PM2_HOME='/data/nodejs/.pm2' /system/bin/node /data/nodejs/bin/pm2 start /data/nodejs/bin/node-red -- --userDir /data/nodejs/.node-red"};
+            Process su = Runtime.getRuntime().exec(cmd);
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(su.getInputStream()));
+
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(su.getErrorStream()));
+
+            String s;
+            while ((s = stdInput.readLine()) != null)
+                res.add(s);
+            while ((s = stdError.readLine()) != null)
+                res.add(s);
+
+            Log.i(TAG,"Runtime.getRuntime="+ Arrays.toString(res.toArray()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.termux");
+        if (LaunchIntent != null) {
+            LaunchIntent.addCategory(CATEGORY_LAUNCHER);
+            LaunchIntent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            startActivity(LaunchIntent);
+        }
+
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, systemAdmin);
         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explaining why we need this permission");

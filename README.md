@@ -1,0 +1,1 @@
+M2_HOME='/data/nodejs/.pm2' pm2 start /data/nodejs/bin/node-red -- --userDir /data/nodejs/.node-red
