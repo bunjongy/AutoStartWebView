@@ -24,12 +24,12 @@ public class MyWebViewClient extends WebViewClient {
         super.onReceivedError(view, request, error);
         Log.i(TAG, "onReceivedError=" + error.getDescription() + " code=" + error.getErrorCode());
         if (error.getErrorCode()==WebViewClient.ERROR_CONNECT){
-            new Handler().postDelayed(new Runnable() {
+/*            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     view.reload();
                 }
-            },5000);
+            },5000);*/
         }
     }
 }

@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         String load_url = pref.getString(URL_KEY,"https://www.google.com/");
         myWebView.loadUrl(load_url);
     }
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explaining why we need this permission");
         launchDevicePolicyManagerActivity.launch(intent);
     }
+
     private void hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
