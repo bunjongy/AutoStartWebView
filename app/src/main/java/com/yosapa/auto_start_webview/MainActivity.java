@@ -356,3 +356,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+//    dpm remove-active-admin com.yosapa.auto_start_webview/.SystemAdmin
+//    dpm remove-active-admin com.yosapa.auto_start_webview/.SystemAdmin
+//    dpm set-device-owner com.yosapa.auto_start_webview/.SystemAdmin
+//    pm uninstall -k com.yosapa.auto_start_webview
